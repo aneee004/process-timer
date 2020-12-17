@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <sys/shm.h>
-#include <sys/mman.h>
-#include <sys/wait.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/time.h>
+#include <sys/mman.h>
+#include <sys/wait.h>
+
 
 int main(int argc, char* argv[]) {
     double* ptr; // shared memory pointer
