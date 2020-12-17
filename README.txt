@@ -12,8 +12,8 @@ CLI commands, and display the elapsed time for running the command.
 
 SYSTEM REQUIREMENTS
 ------------
- * Linux/UNIX based operation system
- * gcc compiler
+ * Linux/UNIX based operation system with CLI
+ * gcc compiler v7.5.0 or above
 
 RUNNING THE PROJECT
 ----------------
