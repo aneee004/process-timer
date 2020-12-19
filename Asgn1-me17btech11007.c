@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
     double* ptr; // shared memory pointer
     struct timeval current_time; // to store the current time
     pid_t pid; // to store the child process id
-    int SIZE, FD, i;
+    int SIZE, FD, i; // shared region size, shm descriptor, iterator
 
     SIZE = sizeof(double); // size of the shared memory space
     FD = shm_open("start_time", O_CREAT | O_RDWR, 0666); // opening the shared memory
@@ -22,27 +22,28 @@ int main(int argc, char* argv[]) {
         printf("Fork failure. Please try again.\n");
     }
     else if (pid == 0) { // child process
-        // write cur time into shared memory space
-        gettimeofday(&current_time, NULL);
-        *ptr = current_time.tv_sec + 1e-6 * current_time.tv_usec;
-        // running the command
-        if (argc > 1) {
+        if (argc > 1) { // if a command is passed
+            // prepare the argv list to pass
             for (int i = 1; i < argc; i++) {
                 argv[i-1] = argv[i];
             }
             argv[argc - 1] = NULL;
+            // write cur time into shared memory space
+            gettimeofday(&current_time, NULL); // get the current time
+            *ptr = current_time.tv_sec + 1e-6 * current_time.tv_usec;
+            //  replace the child process with the command line instruction
             if (execvp(argv[0], argv) == -1) {
-                printf("Error running your command.\n");
+                printf("Error running your command.\n"); // in case an error occurs while replacing
             }
         }
-        else {
+        else { // no command is passed as argument
             printf("No command to execute\n");
         }
     }
     else { // parent process
-        wait(NULL);
-        gettimeofday(&current_time, NULL);
-        printf("\n\nElapsed Time: %lf second(s)\n", current_time.tv_sec + 1e-6 * current_time.tv_usec - *ptr);
+        wait(NULL); // wait for the child to complete
+        gettimeofday(&current_time, NULL); // get the current time
+        printf("\n\nElapsed Time: %lf second(s)\n", current_time.tv_sec + 1e-6 * current_time.tv_usec - *ptr); // log the time
     }
     shm_unlink("start_time");
     return 0;

@@ -12,13 +12,15 @@ CLI commands, and display the elapsed time for running the command.
 
 SYSTEM REQUIREMENTS
 ------------
- * Linux/UNIX based operation system with CLI
+ * Linux operating system with kernel v4.4.0 or above
+   Hint: To check your kernel version run:
+   $ uname -srm
  * gcc compiler v7.5.0 or above
 
 RUNNING THE PROJECT
 ----------------
  * Compile the project with the following command.
-   $ gcc time.c -o time -lrt
+   $ gcc Asgn1-me17btech11007.c -o time -lrt
  * Execute your command as illustrated below.
    $ ./time <command>
    Example:
