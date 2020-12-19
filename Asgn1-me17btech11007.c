@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
     else { // parent process
         wait(NULL); // wait for the child to complete
         gettimeofday(&current_time, NULL); // get the current time
-        printf("\n\nElapsed Time: %lf second(s)\n", current_time.tv_sec + 1e-6 * current_time.tv_usec - *ptr); // log the time
+        printf("\n\nElapsed Time: %lf second(s)\n", current_time.tv_sec + 1e-6 * current_time.tv_usec - *ptr); // logging the time
     }
     shm_unlink("start_time");
     return 0;
