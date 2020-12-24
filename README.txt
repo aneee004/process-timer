@@ -20,7 +20,7 @@ SYSTEM REQUIREMENTS
 RUNNING THE PROJECT
 ----------------
  * Compile the project with the following command.
-   $ gcc Asgn1-me17btech11007.c -o time -lrt
+   $ gcc time.c -o time -lrt
  * Execute your command as illustrated below.
    $ ./time <command>
    Example:
